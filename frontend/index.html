@@ -31,6 +31,24 @@
 
   <p id="mensaje"></p>
 
+<section id="pago-compartido">
+    <h2>Pago compartido</h2>
+    <p>Reserva de ejemplo: Cancha 01 · Exterior, 4 horas × US$1 = US$4</p>
+    <label>Participantes
+      <select id="num-participantes">
+        <option value="2">2</option>
+        <option value="4">4</option>
+      </select>
+    </label>
+    <button id="btn-crear">Dividir pago</button>
+    <p>Plazo para completar los aportes: 2 horas.</p>
+    <div id="aportes"></div>
+    <p id="resumen"></p>
+    <button id="btn-completar" disabled>Completar reserva</button>
+    <p id="msg-pago"></p>
+  </section>
+
   <script src="app.js"></script>
+  <script src="pago-compartido.js"></script>
 </body>
 </html>

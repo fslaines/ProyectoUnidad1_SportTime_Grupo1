@@ -9,3 +9,5 @@ jobs:
         run: test -f frontend/index.html && test -f frontend/app.js
       - name: Validar sintaxis de JavaScript
         run: node --check frontend/app.js
+      - name: Validar sintaxis del pago compartido
+        run: node --check frontend/pago-compartido.js

@@ -8,8 +8,7 @@ const canchas = [
 const HORA_INICIO = 8;
 const HORA_FIN = 22;
 
-const hoy = new Date().toLocaleDateString('en-CA'); // AAAA-MM-DD
-// Reservas ya hechas por "otras personas"
+const hoy = new Date().toLocaleDateString('en-CA');
 const reservas = [
   { canchaId: 1, fecha: hoy, hora: '18:00', codigo: 'SP-0001' },
   { canchaId: 1, fecha: hoy, hora: '19:00', codigo: 'SP-0002' },
@@ -17,9 +16,14 @@ const reservas = [
 
 const selFecha = document.getElementById('fecha');
 const selCancha = document.getElementById('cancha');
+const selDuracion = document.getElementById('duracion');
 const divHorarios = document.getElementById('horarios');
 const pPrecio = document.getElementById('precio');
 const pMensaje = document.getElementById('mensaje');
+
+function horaTexto(h) {
+  return String(h).padStart(2, '0') + ':00';
+}
 
 function estaOcupado(canchaId, fecha, hora) {
   return reservas.some(
@@ -27,49 +31,62 @@ function estaOcupado(canchaId, fecha, hora) {
   );
 }
 
-// HU-01: mostrar disponibilidad por hora
+function bloqueLibre(canchaId, fecha, horaInicio, duracion) {
+  if (horaInicio + duracion > HORA_FIN) return false;
+  for (let i = 0; i < duracion; i++) {
+    if (estaOcupado(canchaId, fecha, horaTexto(horaInicio + i))) return false;
+  }
+  return true;
+}
+
 function mostrarHorarios() {
   const canchaId = Number(selCancha.value);
+  const duracion = Number(selDuracion.value);
   const cancha = canchas.find((c) => c.id === canchaId);
-  pPrecio.textContent = 'Precio por hora: US$' + cancha.precio;
+  pPrecio.textContent =
+    'Tarifa: US$' + cancha.precio + ' por hora · Total: US$' + cancha.precio * duracion;
   divHorarios.innerHTML = '';
 
   for (let h = HORA_INICIO; h < HORA_FIN; h++) {
-    const hora = String(h).padStart(2, '0') + ':00';
     const boton = document.createElement('button');
-    boton.textContent = hora;
+    boton.textContent = horaTexto(h) + ' – ' + horaTexto(h + duracion);
     boton.className = 'hora';
 
-    if (estaOcupado(canchaId, selFecha.value, hora)) {
+    if (bloqueLibre(canchaId, selFecha.value, h, duracion)) {
+      boton.classList.add('libre');
+      boton.onclick = () => reservar(h);
+    } else {
       boton.classList.add('ocupado');
       boton.disabled = true;
-    } else {
-      boton.classList.add('libre');
-      boton.onclick = () => reservar(hora);
     }
     divHorarios.appendChild(boton);
   }
 }
 
-// HU-05: reservar un horario
-function reservar(hora) {
+function reservar(horaInicio) {
   const canchaId = Number(selCancha.value);
+  const duracion = Number(selDuracion.value);
   const fecha = selFecha.value;
+  const cancha = canchas.find((c) => c.id === canchaId);
+  const total = cancha.precio * duracion;
 
   // Si alguien lo reservó mientras tanto, mostrar error
-  if (estaOcupado(canchaId, fecha, hora)) {
+  if (!bloqueLibre(canchaId, fecha, horaInicio, duracion)) {
     pMensaje.className = 'error';
     pMensaje.textContent = 'El horario ya no está disponible. Elige otro.';
     mostrarHorarios();
     return;
   }
 
-  if (!confirm('¿Reservar ' + hora + ' el ' + fecha + '?')) return;
+  const rango = horaTexto(horaInicio) + ' – ' + horaTexto(horaInicio + duracion);
+  if (!confirm('¿Reservar ' + rango + ' el ' + fecha + '? Total: US$' + total)) return;
 
   const codigo = 'SP-' + Math.floor(1000 + Math.random() * 9000);
-  reservas.push({ canchaId, fecha, hora, codigo });
+  for (let i = 0; i < duracion; i++) {
+    reservas.push({ canchaId, fecha, hora: horaTexto(horaInicio + i), codigo });
+  }
   pMensaje.className = 'exito';
-  pMensaje.textContent = 'Reserva confirmada. Código: ' + codigo;
+  pMensaje.textContent = 'Reserva confirmada. Código: ' + codigo + ' · Total: US$' + total;
   mostrarHorarios();
 }
 
@@ -84,4 +101,5 @@ selFecha.value = hoy;
 selFecha.min = hoy;
 selFecha.onchange = mostrarHorarios;
 selCancha.onchange = mostrarHorarios;
+selDuracion.onchange = mostrarHorarios;
 mostrarHorarios();

@@ -1,8 +1,9 @@
 // Datos de ejemplo (simulan la base de datos)
 const canchas = [
-  { id: 1, nombre: 'Cancha de fútbol 1', precio: 20 },
-  { id: 2, nombre: 'Cancha de fútbol 2', precio: 15 },
-  { id: 3, nombre: 'Cancha de fútbol 3', precio: 12 },
+  { id: 1, nombre: 'Cancha 01 · Exterior', precio: 1 },
+  { id: 2, nombre: 'Cancha 02 · Cubierta', precio: 1 },
+  { id: 3, nombre: 'Cancha 03 · Exterior', precio: 1 },
+  { id: 4, nombre: 'Cancha 04 · Cubierta', precio: 1 },
 ];
 const HORA_INICIO = 8;
 const HORA_FIN = 22;
@@ -30,7 +31,7 @@ function estaOcupado(canchaId, fecha, hora) {
 function mostrarHorarios() {
   const canchaId = Number(selCancha.value);
   const cancha = canchas.find((c) => c.id === canchaId);
-  pPrecio.textContent = 'Precio por hora: $' + cancha.precio;
+  pPrecio.textContent = 'Precio por hora: US$' + cancha.precio;
   divHorarios.innerHTML = '';
 
   for (let h = HORA_INICIO; h < HORA_FIN; h++) {

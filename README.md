@@ -32,4 +32,4 @@ Abrir frontend/index.html en el navegador. No requiere instalación.
 
 - Jira: pendiente
 - Confluence: pendiente
-- Figma: pendiente
+- Figma: https://www.figma.com/proto/9WOb0ryhVn7MHL0DZg3WUh/Untitled?node-id=82-184&t=9PTvJAjLy0Zp4xUc-1

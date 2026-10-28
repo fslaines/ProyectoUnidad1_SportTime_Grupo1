@@ -26,7 +26,7 @@ Solicitud de cambio (Actividad 4): **Pago Compartido**.
 
 ## Instrucciones de ejecución
 
-Pendiente: se completará cuando el código base esté listo.
+Abrir frontend/index.html en el navegador. No requiere instalación.
 
 ## Enlaces del proyecto
 

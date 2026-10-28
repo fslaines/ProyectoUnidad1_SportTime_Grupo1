@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; max-width: 700px; margin: 20px auto; padding: 0 12px; }
+section { margin-bottom: 16px; }
+label { margin-right: 16px; }
+#horarios { display: flex; flex-wrap: wrap; gap: 8px; }
+.hora { padding: 10px 14px; border: none; border-radius: 6px; cursor: pointer; }
+.libre { background: #2e9e4f; color: white; }
+.ocupado { background: #ccc; color: #666; cursor: not-allowed; }
+.exito { color: #1b7a38; font-weight: bold; }
+.error { color: #c0392b; font-weight: bold; }

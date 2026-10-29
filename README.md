@@ -33,3 +33,4 @@ Abrir frontend/index.html en el navegador. No requiere instalación.
 - Jira: https://espe-team-oaa8byk0.atlassian.net/jira/software/projects/PSG/boards/2/backlog?atlOrigin=eyJpIjoiMGYzMzBkMmEyYTVlNGZjM2E2MWJkMGRkNjc2NzEwOWEiLCJwIjoiaiJ9
 - Confluence: https://espe-team-oaa8byk0.atlassian.net/wiki/x/CgA8
 - Figma: https://www.figma.com/proto/9WOb0ryhVn7MHL0DZg3WUh/Untitled?node-id=82-184&t=9PTvJAjLy0Zp4xUc-1
+- Figma editable: https://www.figma.com/design/9WOb0ryhVn7MHL0DZg3WUh/Untitled?node-id=0-1&t=wDrC0BUCGWawBNnh-1
